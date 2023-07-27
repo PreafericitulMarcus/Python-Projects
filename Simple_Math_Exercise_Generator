@@ -37,7 +37,10 @@ for i in range(numEx):
         # a + b = C
         else:
             a = r.randint(0, 99)
-            b = r.randint(0, a)
+            b = r.randint(0, 99)
+            while a + b > 99:
+                a = r.randint(0, 99)
+                b = r.randint(0, 99)
             f.write(f"{i}. {a} + {b} = c")
             m = a + b
             t.write(f"{i}. c = {m}")
