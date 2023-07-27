@@ -1,3 +1,4 @@
+# It will generate as many simple math programs with addition and subtractions 
 import random as r
 
 numEx = int(input("Number of exercises: "))
