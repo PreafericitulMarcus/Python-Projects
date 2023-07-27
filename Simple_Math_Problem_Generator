@@ -1,0 +1,62 @@
+import random as r
+
+numEx = int(input("Number of exercises: "))
+
+f = open("sheet.txt", "w")
+
+for i in range(numEx):
+
+    # sign
+    sign = ["+", "-"]
+    sign = r.choice(sign)
+
+    # type of exercise
+    typeOfEx = [1, 2, 3]
+    typeOfEx = r.choice(typeOfEx)
+
+    if sign == "+":
+
+        # A + b = c
+        if typeOfEx == 1:
+            b = r.randint(0, 99)
+            c = r.randint(b, 99)
+            f.write(f"{i}. a + {b} = {c}")
+
+        # a + B = c
+        elif typeOfEx == 2:
+            c = r.randint(0, 99)
+            a = r.randint(0, c)
+            f.write(f"{i}. {a} + b = {c}")
+
+        # a + b = C
+        else:
+            a = r.randint(0, 99)
+            b = r.randint(0, a)
+            f.write(f"{i}. {a} + {b} = c")
+
+    elif sign == "-":
+
+        # A - b = c
+        if typeOfEx == 1:
+            c = r.randint(0, 99)
+            b = r.randint(0, 99)
+            while b+c > 99:
+                c = r.randint(0, 99)
+                b = r.randint(0, 99)
+            f.write(f"{i}. a - {b} = {c}")
+
+        # a - B = c
+        elif typeOfEx == 2:
+            a = r.randint(0, 99)
+            c = r.randint(0, a)
+            f.write(f"{i}. {a} - b = {c}")
+
+        # a - b = C
+        else:
+            a = r.randint(0, 99)
+            b = r.randint(0, a)
+            f.write(f"{i}. {a} - {b} = c")
+
+    # new line between each exercise
+    f.write("\n")
+f.close
