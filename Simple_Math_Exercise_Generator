@@ -1,12 +1,14 @@
-# It will generate as many simple math exercises with addition and subtractions 
+# It will generate as many simple random math exercises with addition and subtractions  ( a +/- b = c )
 import random as r
 
 numEx = int(input("Number of exercises: "))
 
+# sheet will contain each exercise
 f = open("sheet.txt", "w")
+# answers will contain the answers to each exercise for faster verification
+t = open("answers.txt", "w")
 
 for i in range(numEx):
-
     # sign
     sign = ["+", "-"]
     sign = r.choice(sign)
@@ -16,48 +18,60 @@ for i in range(numEx):
     typeOfEx = r.choice(typeOfEx)
 
     if sign == "+":
-
         # A + b = c
         if typeOfEx == 1:
             b = r.randint(0, 99)
             c = r.randint(b, 99)
             f.write(f"{i}. a + {b} = {c}")
+            m = c - b
+            t.write(f"{i}. a = {m}")
 
         # a + B = c
         elif typeOfEx == 2:
             c = r.randint(0, 99)
             a = r.randint(0, c)
             f.write(f"{i}. {a} + b = {c}")
+            m = c - a
+            t.write(f"{i}. b = {m}")
 
         # a + b = C
         else:
             a = r.randint(0, 99)
             b = r.randint(0, a)
             f.write(f"{i}. {a} + {b} = c")
+            m = a + b
+            t.write(f"{i}. c = {m}")
 
     elif sign == "-":
-
         # A - b = c
         if typeOfEx == 1:
             c = r.randint(0, 99)
             b = r.randint(0, 99)
-            while b+c > 99:
+            while b + c > 99:
                 c = r.randint(0, 99)
                 b = r.randint(0, 99)
             f.write(f"{i}. a - {b} = {c}")
+            m = c + b
+            t.write(f"{i}. a = {m}")
 
         # a - B = c
         elif typeOfEx == 2:
             a = r.randint(0, 99)
             c = r.randint(0, a)
             f.write(f"{i}. {a} - b = {c}")
+            m = a - c
+            t.write(f"{i}. b = {m}")
 
         # a - b = C
         else:
             a = r.randint(0, 99)
             b = r.randint(0, a)
             f.write(f"{i}. {a} - {b} = c")
+            m = a - b
+            t.write(f"{i}. c = {m}")
 
-    # new line between each exercise
+    # new line between each exerciseF
     f.write("\n")
+    t.write("\n")
 f.close
+t.close
