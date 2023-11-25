@@ -1,17 +1,16 @@
-import numpy
+import numpy as np
 
 # TODO getter, setter, change the vector(add vecotr, substract...)
 # this go to repo
 # test each def
 
 
-
 class MyVector:
     def __init__(self, name_id, color, type, values):
         self.__name_id = name_id
-        self.__color = color
+        self.__color = str(color)
         self.__type = type
-        self.__values = values[:]
+        self.__values = np.array(values)
 
     def get_name_id(self):
         return self.__name_id
@@ -35,14 +34,12 @@ class MyVector:
         self.__type = new_type
 
     def set_values(self, new_values):
-        self.__values = new_values[:]
+        self.__values = np.array(new_values)
 
     def __str__(self):
         return f"Vector: {self.__name_id}, color: {self.__color}, type: {self.__type}, values: {self.__values}"
 
-
-
-    #only test
+    # only test
     def add_scalar(self, scalar):
         pass
 

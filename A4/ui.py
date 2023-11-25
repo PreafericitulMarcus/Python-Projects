@@ -49,6 +49,29 @@ class UI:
                 self.vector_repo.update_vector_at_index(
                     index, new_color, new_type, new_values_list
                 )
+            elif path == 5:
+                search_name_id = input("what is the name_id of the vector to update?: ")
+                new_color = input("new color: ")
+                new_type = int(input("new type: "))
+                new_values = input("new values (x y z..): ")
+
+                new_values_list = []
+                for value in new_values.split(" "):
+                    new_values_list.append(int(value))
+
+                self.vector_repo.update_vector_at_name_id(
+                    search_name_id, new_color, new_type, new_values_list
+                )
+            elif path == 6:
+                index = int(input("index of the vector to be deleted: "))
+                self.vector_repo.delete_vector_by_index(index)
+
+            elif path == 7:
+                search_name_id = input("name_id of the vector to be deleted: ")
+                self.vector_repo.delete_vector_by_name_id(search_name_id)
+
+            elif path == 8:
+                self.vector_repo.plot_vectors_in_chart()
 
 
 UI().run()
