@@ -34,7 +34,7 @@ class UI:
                 v_color = input("color of vector: ")
                 v_values = input("vhat are the values of the vector: ")
                 values_list = []
-                for value in v_values.split(" "):
+                for value in v_values.strip().split(" "):
                     values_list.append(int(value))
                 self.vector_repo.add_vector_to_repository(
                     v_id, v_color, v_type, values_list

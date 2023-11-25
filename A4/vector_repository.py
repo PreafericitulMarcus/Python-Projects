@@ -49,7 +49,6 @@ class VectorRepository:
     def plot_vectors_in_chart(self):
         for vector in self.__data:
             if vector.get_type() == 1:
-                print(type(vector.get_values()))
                 plt.plot(vector.get_values(), marker="o", color=vector.get_color())
             elif vector.get_type() == 2:
                 plt.plot(vector.get_values(), marker="s", color=vector.get_color())
