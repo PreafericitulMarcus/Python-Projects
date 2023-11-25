@@ -25,7 +25,7 @@ class PointRepository:
         function reads elements from file input.txt
         enteries are the same as for function add_point_to_repository
         """
-        with open("input.txt", "r") as file:
+        with open("A3/input.txt", "r") as file:
             for line in file:
                 x, y, color = line.strip().split(" ")
                 self.add_point_to_repository(int(x), int(y), color)
