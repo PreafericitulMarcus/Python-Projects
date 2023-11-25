@@ -29,7 +29,17 @@ class UI:
                 self.non_stop = False
                 print("exit...")
             elif path == 1:
-                pass
+                v_id = int(input("vector id: "))
+                v_type = int(input("type of vector: "))
+                v_color = input("color of vector: ")
+                v_values = input("vhat are the values of the vector: ")
+                values_list = []
+                for value in v_values.split(" "):
+                    values_list.append(int(value))
+                self.vector_repo.add_vector_to_repository(
+                    v_id, v_color, v_type, values_list
+                )
+
             elif path == 2:
                 vectors = self.vector_repo.get_all_vectors()
                 for vector in vectors:

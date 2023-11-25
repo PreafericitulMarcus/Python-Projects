@@ -1,5 +1,6 @@
 from vector_logic import MyVector
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 class VectorRepository:
@@ -9,7 +10,10 @@ class VectorRepository:
     def vector_input(self):
         with open("A4/vectors.txt", "r") as vectors:
             for vector in vectors:
-                v_id, v_c, v_t, v_v = vector.strip().split(" ")
+                v_id, v_c, v_t, v_v_str = vector.strip().split(" ")
+                v_v = []
+                for val in v_v_str[1:-1].split(","):
+                    v_v.append(int(val))
                 self.add_vector_to_repository(int(v_id), str(v_c), int(v_t), v_v)
 
     def add_vector_to_repository(self, id, color, type, values):
@@ -45,11 +49,12 @@ class VectorRepository:
     def plot_vectors_in_chart(self):
         for vector in self.__data:
             if vector.get_type() == 1:
+                print(type(vector.get_values()))
                 plt.plot(vector.get_values(), marker="o", color=vector.get_color())
-            # elif vector.get_type() == 2:
-            #     plt.plot(vector.get_values(), marker="s", color=vector.get_color())
-            # elif vector.get_type() == 3:
-            #     plt.plot(vector.get_values(), marker="v", color=vector.get_color())
-            # else:
-            #     plt.plot(vector.get_values(), marker="D", color=vector.get_color())
+            elif vector.get_type() == 2:
+                plt.plot(vector.get_values(), marker="s", color=vector.get_color())
+            elif vector.get_type() == 3:
+                plt.plot(vector.get_values(), marker="v", color=vector.get_color())
+            else:
+                plt.plot(vector.get_values(), marker="D", color=vector.get_color())
         plt.show()

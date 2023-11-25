@@ -1,7 +1,6 @@
 import numpy as np
 
 # TODO getter, setter, change the vector(add vecotr, substract...)
-# this go to repo
 # test each def
 
 
@@ -34,7 +33,7 @@ class MyVector:
         self.__type = new_type
 
     def set_values(self, new_values):
-        self.__values = np.array(new_values)
+        self.__values = new_values
 
     def __str__(self):
         return f"Vector: {self.__name_id}, color: {self.__color}, type: {self.__type}, values: {self.__values}"
