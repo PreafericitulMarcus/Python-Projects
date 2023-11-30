@@ -13,7 +13,7 @@ class VectorRepository:
                 v_v = []
                 for val in v_v_str[1:-1].split(","):
                     v_v.append(int(val))
-                self.add_vector_to_repository(int(v_id), str(v_c), int(v_t), v_v)
+                self.add_vector_to_repository(v_id, str(v_c), int(v_t), v_v)
 
     def add_vector_to_repository(self, id, color, type, values):
         new_vector = MyVector(id, color, type, values)
