@@ -1,6 +1,5 @@
 from vector_logic import MyVector
 import matplotlib.pyplot as plt
-import numpy as np
 
 
 class VectorRepository:
@@ -57,3 +56,25 @@ class VectorRepository:
             else:
                 plt.plot(vector.get_values(), marker="D", color=vector.get_color())
         plt.show()
+
+    def get_vectors_having_sum(self, sum_of_values):
+        vectors_having_sum = []
+        for vector in self.__data:
+            summ = 0
+            for i in range(len(vector.get_values())):
+                summ += vector.get_values()[i]
+            if summ == sum_of_values:
+                vectors_having_sum.append(vector)
+        return vectors_having_sum
+
+    def delete_vectors_between_indexes(self, index1, index2):
+        if index1 > index2:
+            index1, index2 = index2, index1
+        for i in range(index2 - 1, index1 - 1, -1):
+            self.__data.remove(self.__data[i])
+
+    def update_vector_by_type(self, vector_type, new_color):
+        for vector in self.__data:
+            if vector.get_type() == vector_type:
+                vector.set_color(new_color)
+    

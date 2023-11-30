@@ -9,6 +9,7 @@ class UI:
     def menu(self):
         print(
             """
+0. Exit 
 1. Add vector to repository
 2. Get all vectors
 3. Get a vector at a given index 
@@ -17,6 +18,9 @@ class UI:
 6. Delete a vector by index
 7. Delete a vector by "name_id"
 8. Plot all vectors based on type and color
+11. Get the list of vectors havgin a given sum
+19. Delete all vectors between two indexes
+23. Update all vectors having a given type by setting their color to the same given value
           """
         )
 
@@ -83,5 +87,22 @@ class UI:
             elif path == 8:
                 self.vector_repo.plot_vectors_in_chart()
 
+            elif path == 11:
+                sum_of_values = int(input("what is the sum of vecotrs?: "))
+                vectors_having_sum = self.vector_repo.get_vectors_having_sum(
+                    sum_of_values
+                )
+                for vector in vectors_having_sum:
+                    print(vector)
+
+            elif path == 19:
+                start_index = int(input("start index: "))
+                end_index = int(input("end index: "))
+                self.vector_repo.delete_vectors_between_indexes(start_index, end_index)
+
+            elif path == 23:
+                vector_type = int(input("type of vector: "))
+                new_color = input("new color: ")
+                self.vector_repo.update_vectors_by_type(vector_type, new_color)
 
 UI().run()
