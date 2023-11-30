@@ -4,7 +4,7 @@ import numpy as np
 # test each def
 
 
-class MyVector:
+class MyVector:    
     def __init__(self, name_id, color, type, values):
         self.__name_id = name_id
         self.__color = str(color)
@@ -40,16 +40,63 @@ class MyVector:
 
     # only test
     def add_scalar(self, scalar):
-        pass
+        self.__values += scalar
 
-    def add(self, list):
-        pass
+    def add(self, sum_list):
+        for i in range(len(self.__values)):
+            self.__values[i] += sum_list[i]
 
-    def subtract(self, list):
-        pass
+    def subtract(self, sub_list):
+        for i in range(len(self.__values)):
+            self.__values[i] -= sub_list[i]
 
-    def multiplication(self, list):
-        pass
+    def multiplication(self, mul_list):
+        for i in range(len(self.__values)):
+            self.__values[i] *= mul_list[i]
 
     def sum_elem_vector(self):
-        pass
+        sum_elem = 0
+        for elem in self.__values:
+            sum_elem += elem
+        return sum_elem
+
+    def product_elem_vector(self):
+        prod_elem = 1
+        for elem in self.__values:
+            prod_elem *= elem
+        return prod_elem
+
+    def average_elem_vector(self):
+        sum_elem = self.sum_elem_vector()
+        return sum_elem // len(self.__values)
+
+    def minim_elem_vector(self):
+        minimum = self.__values[0]
+        for elem in self.__values:
+            if elem < minimum:
+                minimum = elem
+        return minimum
+
+    def maximum_elem_vector(self):
+        maximum = self.__values[0]
+        for elem in self.__values:
+            if elem > maximum:
+                maximum = elem
+        return maximum
+
+
+# vec = MyVector(0, "r", 2, [1, 1, 1, 1])
+# print(vec)
+# vec.add_scalar(4)
+# print(vec)
+# vec.add([1, 2, 3, 4])
+# print(vec)
+# vec.subtract([1, 2, 3, 4])
+# print(vec)
+# vec.multiplication([1, 2, 3, 4])
+# print(vec)
+# print(vec.sum_elem_vector())
+# print(vec.product_elem_vector())
+# print(vec.average_elem_vector())
+# print(vec.minim_elem_vector())
+# print(vec.maximum_elem_vector())
