@@ -1,10 +1,7 @@
 import numpy as np
 
-# TODO getter, setter, change the vector(add vecotr, substract...)
-# test each def
 
-
-class MyVector:    
+class MyVector:
     def __init__(self, name_id, color, type, values):
         self.__name_id = name_id
         self.__color = str(color)
@@ -38,7 +35,6 @@ class MyVector:
     def __str__(self):
         return f"Vector: {self.__name_id}, color: {self.__color}, type: {self.__type}, values: {self.__values}"
 
-    # only test
     def add_scalar(self, scalar):
         self.__values += scalar
 
@@ -83,20 +79,3 @@ class MyVector:
             if elem > maximum:
                 maximum = elem
         return maximum
-
-
-# vec = MyVector(0, "r", 2, [1, 1, 1, 1])
-# print(vec)
-# vec.add_scalar(4)
-# print(vec)
-# vec.add([1, 2, 3, 4])
-# print(vec)
-# vec.subtract([1, 2, 3, 4])
-# print(vec)
-# vec.multiplication([1, 2, 3, 4])
-# print(vec)
-# print(vec.sum_elem_vector())
-# print(vec.product_elem_vector())
-# print(vec.average_elem_vector())
-# print(vec.minim_elem_vector())
-# print(vec.maximum_elem_vector())
