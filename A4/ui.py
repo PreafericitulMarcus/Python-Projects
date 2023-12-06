@@ -19,7 +19,7 @@ class UI:
 6. Delete a vector by index
 7. Delete a vector by "name_id"
 8. Plot all vectors based on type and color
-9. Get the list of vectors havgin a given sum
+9. Get the list of vectors having a given sum
 10. Delete all vectors between two indexes
 11. Update all vectors having a given type by setting their color to the same given value
           """
@@ -38,7 +38,7 @@ class UI:
 
                 elif path == 1:
                     try:
-                        v_id = input("vector id: ")
+                        v_name_id = input("vector id: ")
 
                         v_type = int(input("type of vector: "))
                         if Test_UI.test_type(v_type) == False:
@@ -53,7 +53,7 @@ class UI:
                         for value in v_values.strip().split(" "):
                             values_list.append(int(value))
                         self.vector_repo.add_vector_to_repository(
-                            v_id, v_color, v_type, values_list
+                            v_name_id, v_color, v_type, values_list
                         )
                     except ValueError as err:
                         print("Error:", err)
@@ -136,7 +136,7 @@ class UI:
 
                 elif path == 9:
                     try:
-                        sum_of_values = int(input("what is the sum of vecotrs?: "))
+                        sum_of_values = int(input("what is the sum of vectors?: "))
                         vectors_having_sum = self.vector_repo.get_vectors_having_sum(
                             sum_of_values
                         )

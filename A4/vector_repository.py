@@ -9,14 +9,14 @@ class VectorRepository:
     def vector_input(self):
         with open("A4/vectors.txt", "r") as vectors:
             for vector in vectors:
-                v_id, v_c, v_t, v_v_str = vector.strip().split(" ")
+                v_name_id, v_c, v_t, v_v_str = vector.strip().split(" ")
                 v_v = []
                 for val in v_v_str[1:-1].split(","):
                     v_v.append(int(val))
-                self.add_vector_to_repository(v_id, str(v_c), int(v_t), v_v)
+                self.add_vector_to_repository(v_name_id, str(v_c), int(v_t), v_v)
 
-    def add_vector_to_repository(self, id, color, type, values):
-        new_vector = MyVector(id, color, type, values)
+    def add_vector_to_repository(self, name_id, color, type, values):
+        new_vector = MyVector(name_id, color, type, values)
         self.__data.append(new_vector)
 
     def get_all_vectors(self):
@@ -61,8 +61,7 @@ class VectorRepository:
         vectors_having_sum = []
         for vector in self.__data:
             summ = 0
-            for i in range(len(vector.get_values())):
-                summ += vector.get_values()[i]
+            summ += vector.sum_elem_vector()
             if summ == sum_of_values:
                 vectors_having_sum.append(vector)
         return vectors_having_sum
@@ -70,11 +69,10 @@ class VectorRepository:
     def delete_vectors_between_indexes(self, index1, index2):
         if index1 > index2:
             index1, index2 = index2, index1
-        for i in range(index2 - 1, index1 - 1, -1):
+        for i in range(index2, index1 - 1, -1):
             self.__data.remove(self.__data[i])
 
     def update_vector_by_type(self, vector_type, new_color):
         for vector in self.__data:
             if vector.get_type() == vector_type:
                 vector.set_color(new_color)
-    
