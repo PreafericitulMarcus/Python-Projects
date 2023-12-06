@@ -39,34 +39,55 @@ class MyVector:
         self.__values += scalar
 
     def add(self, sum_list):
+        """
+        Function adds the values of the vector with the values of the given list
+        """
         for i in range(len(self.__values)):
             self.__values[i] += sum_list[i]
 
     def subtract(self, sub_list):
+        """
+        Function subtracts the values of the vector with the values of the given list
+        """
         for i in range(len(self.__values)):
             self.__values[i] -= sub_list[i]
 
     def multiplication(self, mul_list):
+        """
+        Function multiplies the values of the vector with the values of the given list
+        """
         for i in range(len(self.__values)):
             self.__values[i] *= mul_list[i]
 
     def sum_elem_vector(self):
+        """
+        Function returns the sum of the elements of the vector
+        """
         sum_elem = 0
         for elem in self.__values:
             sum_elem += elem
         return sum_elem
 
     def product_elem_vector(self):
+        """
+        Function returns the product of the elements of the vector
+        """
         prod_elem = 1
         for elem in self.__values:
             prod_elem *= elem
         return prod_elem
 
     def average_elem_vector(self):
+        """
+        Function returns the average of the elements of the vector
+        """
         sum_elem = self.sum_elem_vector()
         return sum_elem // len(self.__values)
 
     def minim_elem_vector(self):
+        """
+        Function returns the minimum of the elements of the vector
+        """
         minimum = self.__values[0]
         for elem in self.__values:
             if elem < minimum:
@@ -74,6 +95,9 @@ class MyVector:
         return minimum
 
     def maximum_elem_vector(self):
+        """
+        Function returns the maximum of the elements of the vector
+        """
         maximum = self.__values[0]
         for elem in self.__values:
             if elem > maximum:
