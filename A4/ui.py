@@ -4,7 +4,7 @@ from tests import Test_UI
 
 class UI:
     def __init__(self):
-        self.non_stop = True
+        self.non_stop = True  # this is a flag for the while loop
         self.vector_repo = VectorRepository()
 
     def menu(self):
@@ -26,8 +26,9 @@ class UI:
         )
 
     def run(self):
-        self.menu()
-        self.vector_repo.vector_input()
+        self.menu()  # this is the menu of the program
+        self.vector_repo.vector_input()  # this is for adding vectors to the repository from the start
+
         while self.non_stop:
             path = input("\nWhat path do you want to go: ")
             if Test_UI.test_path(path):
