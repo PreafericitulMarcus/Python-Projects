@@ -30,8 +30,7 @@ class TestMyVector(unittest.TestCase):
         self.assertEqual(list(self.test_vector.get_values()), [0, -1, -2, -3])
 
     def test_multiplication(self):
-        self.test_vector.multiplication([1, 2, 3, 4])
-        self.assertEqual(list(self.test_vector.get_values()), [1, 2, 3, 4])
+        self.assertEqual(self.test_vector.multiplication([1, 2, 3, 4]), 10)
 
     def test_sum_elem_vector(self):
         self.assertEqual(self.test_vector.sum_elem_vector(), 4)
