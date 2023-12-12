@@ -36,6 +36,9 @@ class MyVector:
         return f"Vector: {self.__name_id}, color: {self.__color}, type: {self.__type}, values: {self.__values}"
 
     def add_scalar(self, scalar):
+        """
+        Functino adds the vector with the given scalar
+        """
         self.__values += scalar
 
     def add(self, sum_list):
