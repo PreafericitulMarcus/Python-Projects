@@ -1,6 +1,9 @@
 from airport_repository import AirportRepository
 from airport_test import Test_Ui
 
+# from plane delete/update passenger
+# can delete/update all
+
 
 class Ui:
     def __init__(self):
@@ -26,17 +29,15 @@ class Ui:
     def run(self):
         self.menu()
         while self.non_stop:
-            path = input("Enter path: ")
             try:
-                if Test_Ui.test_path(path):
-                    path = int(path)
-                    if path == 0:
-                        self.non_stop = False
-                    elif path == 1:
-                        pass
-
+                path = int(input("Enter the path: "))
+                if not 0 <= path <= 9:
+                    raise IndexError("Index out of range")
             except (ValueError, IndexError) as e:
-                print(f"Error: {e}")
+                print("Error!", e)
+            else:
+                if path == 0:
+                    self.non_stop = False
 
 
 Ui().run()

@@ -25,7 +25,6 @@ class Passangers:
     def __str__(self):
         return f"Passanger: {self.__first_name} {self.__last_name} with passport number {self.__passport_number}"
 
-
 class Plane:
     def __init__(
         self, id, airline_company, numbers_of_seats, destination, list_of_passengers
