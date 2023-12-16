@@ -9,10 +9,13 @@ class Ui:
     def __init__(self):
         self.non_stop = True
         self.airport_repo = AirportRepository()
+        self.airport_repo.create_plane_from_file()
+        self.airport_repo.create_passenger_from_file()
 
     def menu(self):
         print(
             """
+
 1. Sort the passengers in a plane by last name
 2. Sort planes according to the number of passengers
 3. Sort planes accordint to the number of passengers with the first name starting with a given substring
@@ -22,7 +25,17 @@ class Ui:
 7. Identify plane/s where there is a passenger with given name
 8. Form groups of k passengers from the same plane but with different last names
 9. Form groups of k planes with the same destination but belonging to different airline companies 
-0. Exit              
+10. CRUD
+    0. Missclick
+    1. Add passenger
+    2. Add plane
+    3. Get all
+    4. Update passenger
+    5. Update plane
+    6. Delete passenger
+    7. Delete plane
+0. Exit           
+
 """
         )
 
@@ -30,14 +43,88 @@ class Ui:
         self.menu()
         while self.non_stop:
             try:
-                path = int(input("Enter the path: "))
-                if not 0 <= path <= 9:
+                path = int(input("\nEnter the path: "))
+                if not 0 <= path <= 10:
                     raise IndexError("Index out of range")
             except (ValueError, IndexError) as e:
                 print("Error!", e)
             else:
                 if path == 0:
                     self.non_stop = False
+                elif path == 1:
+                    for plane in self.airport_repo.get_passangers():
+                        print(plane)
+
+                elif path == 10:
+                    try:
+                        sub_path = int(input("\nEnter the sub path: "))
+                        if not 0 <= sub_path <= 3:
+                            raise IndexError("Index out of range")
+                    except (ValueError, IndexError) as e:
+                        print("Error!", e)
+                    else:
+                        self.crud_operations(sub_path)
+
+    def crud_operations(self, sub_path):
+        if sub_path == 0:  # missclick
+            pass
+        elif sub_path == 1:  # add passanger
+            plane_id = input("Enter the plane id: ")
+            print("\nEnter the passenger data then type stop\n")
+            writing = True
+            while writing:
+                try:
+                    passanger = input("Enter the passenger data: ")
+                    if passanger == "stop":
+                        writing = False
+                    else:
+                        try:
+                            passanger = passanger.split()
+                            if len(passanger) != 3:
+                                raise IndexError("Not enough data")
+                            if not passanger[2].isdigit():
+                                raise ValueError("Passport number must be a number")
+                            first_name = passanger[0]
+                            last_name = passanger[1]
+                            passport_number = passanger[2]
+                            self.airport_repo.add_passenger(
+                                plane_id, first_name, last_name, passport_number
+                            )
+                        except (IndexError, ValueError) as e:
+                            print("Error!", e)
+                except ValueError as e:
+                    print("Error!", e)
+        elif sub_path == 2:  # add plane
+            print("\nEnter plane data\n")
+            try:
+                id = input("Enter the id: ")
+                airline_company = input("Enter the airline company: ")
+                numbers_of_seats = int(input("Enter the number of seats: "))
+                destination = input("Enter the destination: ")
+                if not numbers_of_seats > 0:
+                    raise ValueError("Number of seats must be a positive number")
+                if not destination.isalpha():
+                    raise ValueError("Destination must be a string")
+                self.airport_repo.add_plane(
+                    id,
+                    airline_company,
+                    numbers_of_seats,
+                    destination,
+                )
+            except ValueError as e:
+                print("Error!", e)
+        elif sub_path == 3:  # get all
+            for plane in self.airport_repo.get_all():
+                print(plane)
+
+        elif sub_path == 4:  # update passanger
+            pass
+        elif sub_path == 5:  # update plane
+            pass
+        elif sub_path == 6:  # delete passanger
+            pass
+        elif sub_path == 7:  # delete plane
+            pass
 
 
 Ui().run()

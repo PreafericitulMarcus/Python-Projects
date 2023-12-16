@@ -1,4 +1,4 @@
-class Passangers:
+class Passengers:
     def __init__(self, first_name, last_name, passport_number):
         self.__first_name = first_name
         self.__last_name = last_name
@@ -25,6 +25,7 @@ class Passangers:
     def __str__(self):
         return f"Passanger: {self.__first_name} {self.__last_name} with passport number {self.__passport_number}"
 
+
 class Plane:
     def __init__(
         self, id, airline_company, numbers_of_seats, destination, list_of_passengers
@@ -34,6 +35,11 @@ class Plane:
         self.numbers_of_seats = numbers_of_seats
         self.destination = destination
         self.__list_of_passengers = list_of_passengers[:]  # maybe numpy?
+
+    # add, delete, update passenger
+
+    def add_passenger(self, passenger):
+        self.__list_of_passengers.append(passenger)
 
     def get_id(self):
         return self.id
@@ -65,5 +71,17 @@ class Plane:
     def set_list_of_passengers(self, list_of_passengers):
         self.__list_of_passengers = list_of_passengers[:]
 
+    def delete_passenger(self, passenger):
+        self.__list_of_passengers.remove(passenger)
+
+    def delete_all_passengers(self):
+        self.__list_of_passengers.clear()
+
     def __str__(self):
-        return f"Plane: {self.id}, company {self.airline_company}, with destination {self.destination} and {len(self.__list_of_passengers)} passengers out of {self.numbers_of_seats}"
+        return f"Plane: {self.id}, company {self.airline_company}, with destination {self.destination} and {len(self.__list_of_passengers)} passengers out of {self.numbers_of_seats} and with passangers:\n{self.passangers_to_string()}"
+
+    def passangers_to_string(self):
+        string = ""
+        for passenger in self.__list_of_passengers:
+            string += str(passenger) + "\n"
+        return string

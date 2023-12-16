@@ -1,12 +1,12 @@
 import unittest
-from airport_domain import Passangers, Plane
+from airport_domain import Passengers, Plane
 
 
 class Test_Passangers(unittest.TestCase):
     def setUp(self):
-        self.passanger = Passangers("John", "Doe", "123456789")
-        self.passanger2 = Passangers("Will", "Smith", "987654321")
-        self.passanger3 = Passangers("James", "Bond", "077777777")
+        self.passanger = Passengers("John", "Doe", "123456789")
+        self.passanger2 = Passengers("Will", "Smith", "987654321")
+        self.passanger3 = Passengers("James", "Bond", "077777777")
 
     def test_get_first_name(self):
         self.assertEqual(self.passanger.get_first_name(), "John")
@@ -53,12 +53,4 @@ class Test_Plane(unittest.TestCase):
 
 
 class Test_Ui:
-    def test_path(path):
-        try:
-            path = int(path)
-            if not (0 <= path <= 11):
-                raise IndexError("Path out of range")
-        except ValueError:
-            raise ValueError("Path must be an integer")
-        else:
-            return True
+    pass
