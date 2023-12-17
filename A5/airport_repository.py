@@ -16,6 +16,10 @@ class AirportRepository:
     - add_plane(id, airline_company, numbers_of_seats, destination): Adds a plane to the repository.
     - get_all(): Returns all planes in the repository.
     - general_sort(list_to_sort, condition): Sorts a list based on a given condition.
+    - delete_plane(plane_id): Deletes a plane from the repository.
+    - delete_passenger(name): Deletes a passenger from the repository.
+    - update_passenger(name, new_first_name, new_last_name): Updates the first name and last name of a passenger.
+    - update_plane(old_plane_id, plane_id, new_airline_company, new_numbers_of_seats, new_destination): Updates the details of a plane.
     - sort_by_last_name(): Sorts the passengers in each plane by last name.
     - sort_by_number_of_seats(): Sorts the planes by number of seats.
     - sort_by_first_name_letter(substring): Sorts the planes by the count of passengers' first names starting with a given letter.
@@ -35,6 +39,7 @@ class AirportRepository:
         self._passengers = []
         self._planes = []
 
+    #! CRUD operations
     def create_plane_from_file(self):
         with open("A5/plane_input.txt", "r") as f:
             for line in f.readlines():
@@ -62,6 +67,46 @@ class AirportRepository:
 
     def get_all(self):
         return self._planes
+
+    def delete_plane(self, plane_id):
+        for plane in self._planes:
+            if plane.get_id() == plane_id:
+                self._planes.remove(plane)
+
+    def delete_passenger(self, name):
+        for passenger in self._passengers:
+            if passenger.get_first_name() + " " + passenger.get_last_name() == name:
+                self._passengers.remove(passenger)
+        for plane in self._planes:
+            for passenger in plane.get_list_of_passengers():
+                if passenger.get_first_name() + " " + passenger.get_last_name() == name:
+                    plane.delete_passenger(passenger)
+
+    def update_passenger(self, name, new_first_name, new_last_name):
+        for passenger in self._passengers:
+            if passenger.get_first_name() + " " + passenger.get_last_name() == name:
+                passenger.set_first_name(new_first_name)
+                passenger.set_last_name(new_last_name)
+        for plane in self._planes:
+            for passenger in plane.get_list_of_passengers():
+                if passenger.get_first_name() + " " + passenger.get_last_name() == name:
+                    passenger.set_first_name(new_first_name)
+                    passenger.set_last_name(new_last_name)
+
+    def update_plane(
+        self,
+        old_plane_id,
+        plane_id,
+        new_airline_company,
+        new_numbers_of_seats,
+        new_destination,
+    ):
+        for plane in self._planes:
+            if plane.get_id() == old_plane_id:
+                plane.set_id(plane_id)
+                plane.set_airline_company(new_airline_company)
+                plane.set_numbers_of_seats(new_numbers_of_seats)
+                plane.set_destination(new_destination)
 
     #! Here is the sorting part
     def general_sort(self, list_to_sort, condition):

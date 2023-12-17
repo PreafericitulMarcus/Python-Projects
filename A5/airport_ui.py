@@ -123,7 +123,7 @@ class Ui:
                 elif path == 10:
                     try:
                         sub_path = int(input("\nEnter the sub path: "))
-                        if not 0 <= sub_path <= 3:
+                        if not 0 <= sub_path <= 7:
                             raise IndexError("Index out of range")
                     except (ValueError, IndexError) as e:
                         print("Error!", e)
@@ -183,13 +183,74 @@ class Ui:
                 print(plane)
 
         elif sub_path == 4:  # update passanger
-            pass
+            try:  # old passenger
+                old_passenger = input("Enter the old passenger data: ")
+                old_passenger = old_passenger.split()
+                if len(old_passenger) != 3:
+                    raise IndexError("Not enough data")
+                if not old_passenger[2].isdigit():
+                    raise ValueError("Passport number must be a number")
+                first_name = old_passenger[0]
+                last_name = old_passenger[1]
+                passport_number = old_passenger[2]
+            except (IndexError, ValueError) as e:
+                print("Error!", e)
+            else:
+                try:  # new passenger
+                    new_passenger = input("Enter the new passenger data: ")
+                    new_passenger = new_passenger.split()
+                    if len(new_passenger) != 3:
+                        raise IndexError("Not enough data")
+                    if not new_passenger[2].isdigit():
+                        raise ValueError("Passport number must be a number")
+                    first_name = new_passenger[0]
+                    last_name = new_passenger[1]
+                    passport_number = new_passenger[2]
+                    self.airport_repo.update_passenger(
+                        first_name, last_name, passport_number
+                    )
+                except (IndexError, ValueError) as e:
+                    print("Error!", e)
+
         elif sub_path == 5:  # update plane
-            pass
+            try:
+                old_plane_id = input("Enter the old plane id: ")
+                new_plane = input("Enter the new plane data: ")
+                new_plane = new_plane.split()
+                if len(new_plane) != 4:
+                    raise IndexError("Not enough data")
+                if not new_plane[2].isdigit():
+                    raise ValueError("Number of seats must be a number")
+                if not new_plane[3].isalpha():
+                    raise ValueError("Destination must be a string")
+                id = new_plane[0]
+                airline_company = new_plane[1]
+                numbers_of_seats = new_plane[2]
+                destination = new_plane[3]
+                self.airport_repo.update_plane(
+                    old_plane_id, id, airline_company, numbers_of_seats, destination
+                )
+            except (IndexError, ValueError) as e:
+                print("Error!", e)
         elif sub_path == 6:  # delete passanger
-            pass
+            try:
+                name = input("Enter the name: ")
+                first_name = name.split()[0]
+                last_name = name.split()[1]
+                if not first_name.isalpha() or not last_name.isalpha():
+                    raise ValueError("Name must be a string")
+                self.airport_repo.delete_passenger(name)
+            except ValueError as e:
+                print("Error!", e)
+            except IndexError:
+                print("Error!", "Name must have a first and last name")
+
         elif sub_path == 7:  # delete plane
-            pass
+            try:
+                id = input("Enter the id: ")
+                self.airport_repo.delete_plane(id)
+            except ValueError as e:
+                print("Error!", e)
 
 
 Ui().run()
