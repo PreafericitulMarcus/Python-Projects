@@ -52,7 +52,24 @@ class Ui:
                 if path == 0:
                     self.non_stop = False
                 elif path == 1:
-                    for plane in self.airport_repo.get_passangers():
+                    self.airport_repo.sort_by_last_name()
+                    for plane in self.airport_repo.get_all():
+                        print(plane)
+
+                elif path == 2:
+                    self.airport_repo.sort_by_number_of_seats()
+                    for plane in self.airport_repo.get_all():
+                        print(plane)
+
+                elif path == 3:
+                    try:
+                        substring = input("Enter the substring: ")
+                        if not substring.isalpha():
+                            raise ValueError("Substring must be a string")
+                    except ValueError as e:
+                        print("Error!", e)
+                    self.airport_repo.sort_by_first_name_letter(substring)
+                    for plane in self.airport_repo.get_all():
                         print(plane)
 
                 elif path == 10:

@@ -15,9 +15,9 @@ class AirportRepository:
     def create_passenger_from_file(self):
         with open("A5/passangers_input.txt", "r") as f:
             for line in f.readlines():
-                passanger = line.split(" ")
+                passenger = line.split(" ")
                 self.add_passenger(
-                    passanger[0], passanger[1], passanger[2], int(passanger[3])
+                    passenger[0], passenger[1], passenger[2], int(passenger[3])
                 )
 
     def add_passenger(self, plane_id, first_name, last_name, passport_number):
@@ -34,14 +34,21 @@ class AirportRepository:
     def get_all(self):
         return self._planes
 
-    def general_sort(self, condition):
-        self._planes.sort(key=condition)
+    def general_sort(self, list_to_sort, condition):
+        for i in range(len(list_to_sort)):
+            for j in range(i + 1, len(list_to_sort)):
+                if condition(list_to_sort[i]) > condition(list_to_sort[j]):
+                    list_to_sort[i], list_to_sort[j] = list_to_sort[j], list_to_sort[i]
 
-    def get_passangers(self):
-        return self._passengers
+    def sort_by_last_name(self):
+        for plane in self._planes:
+            self.general_sort(
+                plane.get_list_of_passengers(),
+                lambda passenger: passenger.get_last_name(),
+            )
 
     def sort_by_number_of_seats(self):
-        self.general_sort(lambda plane: plane.get_numbers_of_seats())
+        self.general_sort(self._planes, lambda plane: plane.get_numbers_of_seats())
 
-    def sort_by_first_name_letter(self):
-        self.general_sort(lambda plane: plane.get_first_name()[0])
+    def sort_by_first_name_letter(self, substring):
+        pass
