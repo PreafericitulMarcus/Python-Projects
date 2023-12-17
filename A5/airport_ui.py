@@ -1,5 +1,6 @@
 from airport_repository import AirportRepository
 from airport_test import Test_Ui
+import sys
 
 # from plane delete/update passenger
 # can delete/update all
@@ -66,11 +67,58 @@ class Ui:
                         substring = input("Enter the substring: ")
                         if not substring.isalpha():
                             raise ValueError("Substring must be a string")
+                        if len(substring) != 1:
+                            raise ValueError("Substring must be a single character")
                     except ValueError as e:
                         print("Error!", e)
                     self.airport_repo.sort_by_first_name_letter(substring)
                     for plane in self.airport_repo.get_all():
                         print(plane)
+
+                elif path == 4:
+                    self.airport_repo.sort_by_concatenation_passengers_destination()
+                    for plane in self.airport_repo.get_all():
+                        print(plane)
+
+                elif path == 5:
+                    planes = (
+                        self.airport_repo.filter_by_same_first_three_numbers_of_passport_number()
+                    )
+                    for plane in planes:
+                        print(plane)
+
+                elif path == 6:
+                    try:
+                        substring = input("Enter the substring: ")
+                        plane_id = input("Enter the plane id: ")
+                        if not substring.isalpha():
+                            raise ValueError("Substring must be a string")
+                    except ValueError as e:
+                        print("Error!", e)
+                    else:
+                        passengers = (
+                            self.airport_repo.filter_by_substring_in_first_last_name(
+                                plane_id, substring
+                            )
+                        )
+                        for passenger in passengers:
+                            print(passenger)
+
+                elif path == 7:
+                    try:
+                        name = input("Enter the name: ")
+                        first_name = name.split()[0]
+                        last_name = name.split()[1]
+                        if not first_name.isalpha() or not last_name.isalpha():
+                            raise ValueError("Name must be a string")
+                    except ValueError as e:
+                        print("Error!", e)
+                    except IndexError:
+                        print("Error!", "Name must have a first and last name")
+                    else:
+                        planes = self.airport_repo.filter_by_name(name)
+                        for plane in planes:
+                            print(plane)
 
                 elif path == 10:
                     try:
