@@ -1,9 +1,4 @@
 from airport_repository import AirportRepository
-from airport_test import Test_Ui
-import sys
-
-# from plane delete/update passenger
-# can delete/update all
 
 
 class Ui:
@@ -120,6 +115,36 @@ class Ui:
                         for plane in planes:
                             print(plane)
 
+                elif path == 8:
+                    try:
+                        k = int(input("Enter the number of passengers to group: "))
+                        if not k > 0:
+                            raise ValueError("K must be a positive number")
+                    except ValueError as e:
+                        print("Error!", e)
+                    else:
+                        solution = self.airport_repo.group_by_last_name(k)
+                        for group in solution:
+                            for passenger in group:
+                                print(passenger)
+                            print("\n")
+
+                elif path == 9:
+                    try:
+                        k = int(input("Enter the number of planes to group: "))
+                        if not k > 0:
+                            raise ValueError("K must be a positive number")
+                    except ValueError as e:
+                        print("Error!", e)
+                    else:
+                        solution = (
+                            self.airport_repo.group_by_destination_different_company(k)
+                        )
+                        for group in solution:
+                            for plane in group:
+                                print(plane.get_id())
+                            print("\n")
+
                 elif path == 10:
                     try:
                         sub_path = int(input("\nEnter the sub path: "))
@@ -182,17 +207,14 @@ class Ui:
             for plane in self.airport_repo.get_all():
                 print(plane)
 
-        elif sub_path == 4:  # update passanger
+        elif sub_path == 4:  # update passanger     can be by passport
             try:  # old passenger
-                old_passenger = input("Enter the old passenger data: ")
-                old_passenger = old_passenger.split()
-                if len(old_passenger) != 3:
-                    raise IndexError("Not enough data")
-                if not old_passenger[2].isdigit():
+                old_passport_number = input("Enter the old passport number: ")
+                if not old_passport_number.isdigit():
                     raise ValueError("Passport number must be a number")
-                first_name = old_passenger[0]
-                last_name = old_passenger[1]
-                passport_number = old_passenger[2]
+                old_passenger = self.airport_repo.update_passenger(
+                    int(old_passport_number)
+                )
             except (IndexError, ValueError) as e:
                 print("Error!", e)
             else:

@@ -82,16 +82,20 @@ class AirportRepository:
                 if passenger.get_first_name() + " " + passenger.get_last_name() == name:
                     plane.delete_passenger(passenger)
 
-    def update_passenger(self, name, new_first_name, new_last_name):
+    def update_passenger(
+        self, old_passport_number, new_first_name, new_last_name, new_passport_number
+    ):
         for passenger in self._passengers:
-            if passenger.get_first_name() + " " + passenger.get_last_name() == name:
+            if passenger.get_passport_number() == old_passport_number:
                 passenger.set_first_name(new_first_name)
                 passenger.set_last_name(new_last_name)
+                passenger.set_passport_number(new_passport_number)
         for plane in self._planes:
             for passenger in plane.get_list_of_passengers():
-                if passenger.get_first_name() + " " + passenger.get_last_name() == name:
+                if passenger.get_passport_number() == old_passport_number:
                     passenger.set_first_name(new_first_name)
                     passenger.set_last_name(new_last_name)
+                    passenger.set_passport_number(new_passport_number)
 
     def update_plane(
         self,
@@ -196,9 +200,46 @@ class AirportRepository:
 
     def same_name(self, plane, name):
         passengers = plane.get_list_of_passengers()
-        for passanger in passengers:
-            if name == str(passanger.get_first_name()) + " " + str(
-                passanger.get_last_name()
-            ):
+        for passenger in passengers:
+            if name == (passenger.get_first_name()) + " " + (passenger.get_last_name()):
                 return True
         return False
+
+    #! Here is the group part
+    def is_valid(self, solution_list, condition):
+        for i in range(len(solution_list) - 1):
+            if condition(solution_list[i], solution_list[i + 1]):
+                return False
+        return True
+
+    def is_solution(self, solution_list, k):
+        return k == len(solution_list)
+
+    def backtracking(self, solution_list, k, domain, condition):
+        if self.is_solution(solution_list, k):
+            if self.is_valid(solution_list, condition):
+                yield solution_list.copy()
+        else:
+            for i in range(len(domain)):
+                element = domain[i]
+                solution_list.append(element)
+                yield from self.backtracking(
+                    solution_list, k, domain[i + 1 :], condition
+                )
+                solution_list.pop()
+
+    def group_by_last_name(self, k):
+        for plane in self._planes:
+            domain = plane.get_list_of_passengers()
+            solution_list = []
+            condition = lambda x, y: x.get_last_name() == y.get_last_name()
+            yield from self.backtracking(solution_list, k, domain, condition)
+
+    def group_by_destination_different_company(self, k):
+        domain = self._planes
+        solution_list = []
+        condition = (
+            lambda x, y: x.get_destination() == y.get_destination()
+            and x.get_airline_company() == y.get_airline_company()
+        )
+        yield from self.backtracking(solution_list, k, domain, condition)

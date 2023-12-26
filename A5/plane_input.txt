@@ -1,3 +1,4 @@
 1 Air 6 San-Francisco 
 2 Ground 5 Cluj
 3 Fire 10 Moon 
+4 Air 10 Sun
