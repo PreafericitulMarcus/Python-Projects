@@ -46,18 +46,22 @@ class Ui:
                 print("Error!", e)
             else:
                 if path == 0:
+                    """Exit"""
                     self.non_stop = False
                 elif path == 1:
+                    """Sort the passengers in a plane by last name"""
                     self.airport_repo.sort_by_last_name()
                     for plane in self.airport_repo.get_all():
                         print(plane)
 
                 elif path == 2:
+                    """Sort planes according to the number of passengers"""
                     self.airport_repo.sort_by_number_of_seats()
                     for plane in self.airport_repo.get_all():
                         print(plane)
 
                 elif path == 3:
+                    """Sort planes accordint to the number of passengers with the first name starting with a given substring"""
                     try:
                         substring = input("Enter the substring: ")
                         if not substring.isalpha():
@@ -71,11 +75,13 @@ class Ui:
                         print(plane)
 
                 elif path == 4:
+                    """Sort planes according to the string obtained by concatenation of the number of passengers in the plane and the destination"""
                     self.airport_repo.sort_by_concatenation_passengers_destination()
                     for plane in self.airport_repo.get_all():
                         print(plane)
 
                 elif path == 5:
+                    """Identify planes that have passengers with passport numbers starting with the same 3 letters"""
                     planes = (
                         self.airport_repo.filter_by_same_first_three_numbers_of_passport_number()
                     )
@@ -83,6 +89,7 @@ class Ui:
                         print(plane)
 
                 elif path == 6:
+                    """Identify passengers from a given plane for which the first name or last name contain a string given as parameter"""
                     try:
                         substring = input("Enter the substring: ")
                         plane_id = input("Enter the plane id: ")
@@ -100,6 +107,7 @@ class Ui:
                             print(passenger)
 
                 elif path == 7:
+                    """Identify plane/s where there is a passenger with given name"""
                     try:
                         name = input("Enter the name: ")
                         first_name = name.split()[0]
@@ -116,6 +124,7 @@ class Ui:
                             print(plane)
 
                 elif path == 8:
+                    """Form groups of k passengers from the same plane but with different last names"""
                     try:
                         k = int(input("Enter the number of passengers to group: "))
                         if not k > 0:
@@ -130,6 +139,7 @@ class Ui:
                             print("\n")
 
                 elif path == 9:
+                    """Form groups of k planes with the same destination but belonging to different airline companies"""
                     try:
                         k = int(input("Enter the number of planes to group: "))
                         if not k > 0:
@@ -146,6 +156,7 @@ class Ui:
                             print("\n")
 
                 elif path == 10:
+                    """CRUD operations"""
                     try:
                         sub_path = int(input("\nEnter the sub path: "))
                         if not 0 <= sub_path <= 7:

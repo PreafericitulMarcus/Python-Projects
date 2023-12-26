@@ -56,8 +56,6 @@ class Plane:
         self.destination = destination
         self.__list_of_passengers = list_of_passengers[:]
 
-    # add, delete, update passengerF
-
     def add_passenger(self, passenger):
         self.__list_of_passengers.append(passenger)
 
