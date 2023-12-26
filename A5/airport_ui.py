@@ -22,7 +22,7 @@ class Ui:
 8. Form groups of k passengers from the same plane but with different last names
 9. Form groups of k planes with the same destination but belonging to different airline companies 
 10. CRUD
-    0. Missclick
+    0. Go back
     1. Add passenger
     2. Add plane
     3. Get all
