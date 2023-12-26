@@ -1,5 +1,6 @@
 import unittest
 from airport_domain import Passengers, Plane
+from airport_repository import AirportRepository
 
 
 class Test_Passangers(unittest.TestCase):
@@ -49,8 +50,76 @@ class Test_Passangers(unittest.TestCase):
 
 
 class Test_Plane(unittest.TestCase):
+    def setUp(self):
+        self.passanger = Passengers("John", "Doe", "123456789")
+        self.passanger2 = Passengers("Will", "Smith", "987654321")
+        self.passanger3 = Passengers("James", "Bond", "077777777")
+        self.plane = Plane(1, "British Airways", 100, "London", [])
+
+    def test_add_passenger(self):
+        self.plane.add_passenger(self.passanger)
+        self.assertEqual(self.plane.get_list_of_passengers(), [self.passanger])
+        self.plane.add_passenger(self.passanger2)
+        self.assertEqual(
+            self.plane.get_list_of_passengers(), [self.passanger, self.passanger2]
+        )
+        self.plane.add_passenger(self.passanger3)
+        self.assertEqual(
+            self.plane.get_list_of_passengers(),
+            [self.passanger, self.passanger2, self.passanger3],
+        )
+
+    def test_get_id(self):
+        self.assertEqual(self.plane.get_id(), 1)
+
+    def test_get_airline_company(self):
+        self.assertEqual(self.plane.get_airline_company(), "British Airways")
+
+    def test_get_numbe_of_seats(self):
+        self.assertEqual(self.plane.get_number_of_seats(), 100)
+
+    def test_get_destination(self):
+        self.assertEqual(self.plane.get_destination(), "London")
+
+    def test_get_list_of_passengers(self):
+        self.assertEqual(self.plane.get_list_of_passengers(), [])
+
+    def test_set_id(self):
+        self.plane.set_id(2)
+        self.assertEqual(self.plane.get_id(), 2)
+
+    def test_set_airline_company(self):
+        self.plane.set_airline_company("American Airlines")
+        self.assertEqual(self.plane.get_airline_company(), "American Airlines")
+
+    def test_set_number_of_seats(self):
+        self.plane.set_number_of_seats(200)
+        self.assertEqual(self.plane.get_number_of_seats(), 200)
+
+    def test_set_destination(self):
+        self.plane.set_destination("New York")
+        self.assertEqual(self.plane.get_destination(), "New York")
+
+    def test_set_list_of_passengers(self):
+        self.plane.set_list_of_passengers([self.passanger, self.passanger2])
+        self.assertEqual(
+            self.plane.get_list_of_passengers(), [self.passanger, self.passanger2]
+        )
+
+    def test_delete_passenger(self):
+        self.plane.set_list_of_passengers([self.passanger, self.passanger2])
+        self.plane.delete_passenger(self.passanger)
+        self.assertEqual(self.plane.get_list_of_passengers(), [self.passanger2])
+
+    def test_delete_all_passengers(self):
+        self.plane.set_list_of_passengers([self.passanger, self.passanger2])
+        self.plane.delete_all_passengers()
+        self.assertEqual(self.plane.get_list_of_passengers(), [])
+
+
+class Test_AiportRepository(unittest.TestCase):
     pass
 
 
-class Test_Ui:
-    pass
+if __name__ == "__main__":
+    unittest.main()

@@ -65,7 +65,7 @@ class Plane:
     def get_airline_company(self):
         return self.airline_company
 
-    def get_numbers_of_seats(self):
+    def get_number_of_seats(self):
         return self.numbers_of_seats
 
     def get_destination(self):
@@ -80,7 +80,7 @@ class Plane:
     def set_airline_company(self, airline_company):
         self.airline_company = airline_company
 
-    def set_numbers_of_seats(self, numbers_of_seats):
+    def set_number_of_seats(self, numbers_of_seats):
         self.numbers_of_seats = numbers_of_seats
 
     def set_destination(self, destination):

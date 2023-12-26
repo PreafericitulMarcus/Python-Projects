@@ -34,12 +34,12 @@ class AirportRepository:
             if plane.get_id() == plane_id:
                 plane.add_passenger(passenger)
 
-    def add_plane(self, id, airline_company, numbers_of_seats, destination):
+    def add_plane(self, id, airline_company, number_of_seats, destination):
         """
         Adds a plane to the list of planes
-        id: string, airline_company: string, numbers_of_seats: int, destination: string
+        id: string, airline_company: string, number_of_seats: int, destination: string
         """
-        plane = Plane(id, airline_company, numbers_of_seats, destination, [])
+        plane = Plane(id, airline_company, number_of_seats, destination, [])
         self._planes.append(plane)
 
     def get_all(self):
@@ -94,18 +94,18 @@ class AirportRepository:
         old_plane_id,
         plane_id,
         new_airline_company,
-        new_numbers_of_seats,
+        new_number_of_seats,
         new_destination,
     ):
         """
         Updates a plane from the list of planes by plane id
-        old_plane_id: string, plane_id: string, new_airline_company: string, new_numbers_of_seats: int, new_destination: string
+        old_plane_id: string, plane_id: string, new_airline_company: string, new_number_of_seats: int, new_destination: string
         """
         for plane in self._planes:
             if plane.get_id() == old_plane_id:
                 plane.set_id(plane_id)
                 plane.set_airline_company(new_airline_company)
-                plane.set_numbers_of_seats(new_numbers_of_seats)
+                plane.set_number_of_seats(new_number_of_seats)
                 plane.set_destination(new_destination)
 
     #! Here is the sorting part
@@ -128,11 +128,11 @@ class AirportRepository:
 
     def sort_by_number_of_seats(self):
         """
-        Sorts planes by the numbers of seats
+        Sorts planes by the number of seats
         """
         self.general_sort(
             self._planes,
-            lambda x, y: x.get_numbers_of_seats() < y.get_numbers_of_seats(),
+            lambda x, y: x.get_number_of_seats() < y.get_number_of_seats(),
         )
 
     def sort_by_first_name_letter(self, substring):
