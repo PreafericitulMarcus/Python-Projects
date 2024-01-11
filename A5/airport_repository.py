@@ -42,6 +42,12 @@ class AirportRepository:
         plane = Plane(id, airline_company, number_of_seats, destination, [])
         self._planes.append(plane)
 
+    def get_all_passengers(self):
+        """
+        Return the list of passengers
+        """
+        return self._passengers
+
     def get_all(self):
         """
         Return the list of planes which include the passengers
