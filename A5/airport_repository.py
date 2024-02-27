@@ -322,7 +322,7 @@ class AirportRepository:
         domain = self._planes
         solution_list = []
         condition = (
-            lambda x, y: x.get_destination() == y.get_destination()
-            and x.get_airline_company() == y.get_airline_company()
+            lambda x, y: x.get_destination() != y.get_destination()
+            or x.get_airline_company() == y.get_airline_company()
         )
         yield from self.backtracking(solution_list, k, domain, condition)
